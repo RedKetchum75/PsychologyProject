@@ -1,0 +1,77 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f0f4f8;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s ease;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+p {
+    font-size: 1.1rem;
+    color: #7f8c8d;
+    margin-bottom: 30px;
+}
+
+#emotional-wheel {
+    width: 500px;
+    height: 520px; /* Increased to accommodate the indicator */
+    margin: 0 auto;
+    position: relative;
+}
+
+/* #emotional-wheel svg {
+    width: 100%;
+    height: 100%;
+    transition: transform 5s cubic-bezier(0.25, 0.1, 0.25, 1);
+} */
+
+#selected-emotion {
+    margin-top: 40px;
+}
+
+h2 {
+    font-size: 1.8rem;
+    color: #2c3e50;
+}
+
+#emotion-name {
+    font-weight: bold;
+    color: #e74c3c;
+}
+
+#emotion-description {
+    font-size: 1.2rem;
+    color: #34495e;
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+#spin-wheel {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#spin-wheel:hover {
+    background-color: #2980b9;
+}

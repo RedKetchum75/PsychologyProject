@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emotional Wheel</title>
+    <link rel="stylesheet" href="EmotionalWheel.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>Emotional Wheel</h1>
+        <p>Based on Robert Plutchik's Theory of Emotions</p>
+        <div id="emotional-wheel">
+            <svg width="500" height="500" viewBox="0 0 500 500"></svg>
+        </div>
+        <button id="spin-wheel">Spin the Wheel</button>
+        <div id="selected-emotion">
+            <h2>Selected Emotion: <span id="emotion-name"></span></h2>
+            <p id="emotion-description"></p>
+        </div>
+    </div>
+
+    <div id="mood-display" class="mood-display"></div>
+
+    <script src="EmotionalWheel.js">
+    </script>
+
+    <script>
+        function displayMood() {
+            const currentMood = localStorage.getItem('currentMood');
+            const moodDisplay = document.getElementById('mood-display');
+            if (currentMood) {
+                moodDisplay.textContent = `Today You're Feeling: ${currentMood}`;
+            }
+        }
+
+        displayMood();
+    </script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calming Playlist</title>
+    <link rel="stylesheet" href="CalmingPlaylist.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="player-container">
+        <h1 id="title">Calming Playlist</h1>
+        <div class="playlist-grid">
+            <div class="playlist-item">
+                <iframe src="https://www.boomplay.com/embed/153481962/MUSIC?colType=&colID=83273555" frameborder="0"></iframe>
+            </div>
+            <div class="playlist-item">
+                <iframe src="https://www.boomplay.com/embed/65701178/MUSIC?colType=5&colID=28405745" frameborder="0"></iframe>
+            </div>
+            <div class="playlist-item">
+                <iframe src="https://www.boomplay.com/embed/62759578/MUSIC?colType=2&colID=719240" frameborder="0"></iframe>
+            </div>
+            <div class="playlist-item">
+                <iframe src="https://www.boomplay.com/embed/119644413/MUSIC?colType=2&colID=1843892" frameborder="0"></iframe>
+            </div>
+            <div class="playlist-item">
+                <iframe src="https://www.boomplay.com/embed/82183702/MUSIC?colType=2&colID=99756" frameborder="0"></iframe>
+            </div>
+            <div class="playlist-item">
+                <iframe src="https://www.boomplay.com/embed/100456291/MUSIC?colType=2&colID=99756" frameborder="0"></iframe>
+            </div>
+            <div class="playlist-item">
+                <iframe src="https://www.boomplay.com/embed/122943630/MUSIC?colType=5&colID=67718711" frameborder="0"></iframe>
+            </div>
+            <div class="playlist-item">
+                <iframe src="https://www.boomplay.com/embed/138088150/MUSIC?colType=2&colID=283746" frameborder="0"></iframe>
+            </div>
+            <div class="playlist-item">
+                <iframe src="https://www.boomplay.com/embed/180845643/MUSIC?colType=2&colID=97496136" frameborder="0"></iframe>
+            </div>
+            <div class="playlist-item">
+                <iframe src="https://www.boomplay.com/embed/9232154/MUSIC?colType=2&colID=4646684" frameborder="0"></iframe>
+            </div>
+            <div class="playlist-item">
+                <iframe src="https://www.boomplay.com/embed/7733438/MUSIC?colType=2&colID=719252" frameborder="0"></iframe>
+            </div>
+            <div class="playlist-item">
+                <iframe src="https://www.boomplay.com/embed/146532148/MUSIC?colType=2&colID=719252" frameborder="0"></iframe>
+            </div>
+            <div class="playlist-item">
+                <iframe src="https://www.boomplay.com/embed/62743881/MUSIC?colType=2&colID=2240222" frameborder="0"></iframe>
+            </div>
+            <div class="playlist-item">
+                <iframe src="https://www.boomplay.com/embed/117330181/MUSIC?colType=2&colID=147377" frameborder="0"></iframe>
+            </div>
+            <div class="playlist-item">
+                <iframe src="https://www.boomplay.com/embed/139474086/MUSIC?colType=5&colID=76555295" frameborder="0"></iframe>
+            </div>
+        </div>
+    </div>
+    <div id="mood-display" class="mood-display"></div>
+
+    <script>
+        function displayMood() {
+            const currentMood = localStorage.getItem('currentMood');
+            const moodDisplay = document.getElementById('mood-display');
+            if (currentMood) {
+                moodDisplay.textContent = `Today You're Feeling: ${currentMood}`;
+            }
+        }
+
+        displayMood();
+    </script>
+</body>
+</html>

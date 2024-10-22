@@ -1,0 +1,112 @@
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #f0ebe5;
+    font-family: 'Georgia', serif;
+    position: relative;
+    overflow: hidden;
+    color: #5a4f4f;
+}
+
+h1 {
+    font-size: 3rem;
+    margin-bottom: 60px;
+    font-weight: normal;
+    color: #7a6a6a;
+    text-align: center;
+}
+
+.mood-options {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    max-width: 1000px;
+    margin-bottom: 60px;
+    gap: 40px;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.column.center {
+    justify-content: center;
+}
+
+.mood-label {
+    font-size: 1.4rem;
+    color: #5a4f4f;
+    cursor: pointer;
+    transition: color 0.3s, transform 0.2s;
+    display: flex;
+    align-items: center;
+}
+
+.mood-label:hover {
+    color: #bcaaa4;
+    transform: translateY(-2px);
+}
+
+.submit-btn {
+    font-size: 1.4rem;
+    padding: 12px 40px;
+    background-color: #d7ccc8;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    color: #5a4f4f;
+    font-family: 'Georgia', serif;
+}
+
+.submit-btn:hover {
+    background-color: #bcaaa4;
+    transform: translateY(-2px);
+}
+
+.mood-display {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: rgba(215, 204, 200, 0.8);
+    padding: 10px 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    font-weight: bold;
+    z-index: 1000;
+    color: #5a4f4f;
+}
+
+.mood-option {
+    display: none;
+}
+
+.mood-label::before {
+    content: '';
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    margin-right: 15px;
+    border: 2px solid #5a4f4f;
+    border-radius: 50%;
+    vertical-align: middle;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.mood-option:checked + .mood-label::before {
+    background-color: #5a4f4f;
+    box-shadow: inset 0 0 0 4px #f0ebe5;
+}
+
+.mood-option:checked + .mood-label {
+    font-weight: bold;
+}
+

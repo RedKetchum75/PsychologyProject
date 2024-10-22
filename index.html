@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mood Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="logo-container">
+        <img src="PHOTO-2024-10-22-10-32-11.jpg" alt="Amity University and Rekhi Foundation Logo" class="logo">
+    </div>
+    
+    <div id="login-container" class="login-container">
+        <h2>Login</h2>
+        <form id="login-form">
+            <input type="text" id="username" placeholder="Username" required>
+            <input type="password" id="password" placeholder="Password" required>
+            <button type="submit">Login</button>
+        </form>
+        <p>New user? <button id="show-register">Register</button></p>
+    </div>
+
+    <div id="register-container" class="login-container" style="display: none;">
+        <h2>Register</h2>
+        <form id="register-form">
+            <input type="text" id="reg-username" placeholder="Username" required>
+            <input type="password" id="reg-password" placeholder="Password" required>
+            <input type="password" id="reg-confirm-password" placeholder="Confirm Password" required>
+            <button type="submit">Register</button>
+        </form>
+        <p>Already have an account? <button id="show-login">Login</button></p>
+    </div>
+
+    <div id="mood-container" class="mood-container" style="display: none;">
+        <div id="mood-display" class="mood-display"></div>
+        <div class="message">It's Okay Not To Be Okay</div>
+        <h1>How are you feeling today?</h1>
+        <div class="mood-options">
+            <div class="mood-column">
+                <input type="radio" id="ecstatic" name="mood" class="mood-option" value="Ecstatic">
+                <label for="ecstatic" class="mood-label">Ecstatic</label>
+
+                <input type="radio" id="depressed" name="mood" class="mood-option" value="Depressed">
+                <label for="depressed" class="mood-label">Depressed</label>
+
+                <input type="radio" id="anxious" name="mood" class="mood-option" value="Anxious">
+                <label for="anxious" class="mood-label">Anxious</label>
+
+                <input type="radio" id="frustrated" name="mood" class="mood-option" value="Frustrated">
+                <label for="frustrated" class="mood-label">Frustrated</label>
+
+                <input type="radio" id="content" name="mood" class="mood-option" value="Content">
+                <label for="content" class="mood-label">Content</label>
+
+                <input type="radio" id="inspired" name="mood" class="mood-option" value="Inspired">
+                <label for="inspired" class="mood-label">Inspired</label>
+
+                <input type="radio" id="overwhelmed" name="mood" class="mood-option" value="Overwhelmed">
+                <label for="overwhelmed" class="mood-label">Overwhelmed</label>
+            </div>
+            <div class="mood-column">
+                <input type="radio" id="exhilarated" name="mood" class="mood-option" value="Exhilarated">
+                <label for="exhilarated" class="mood-label">Exhilarated</label>
+
+                <input type="radio" id="melancholic" name="mood" class="mood-option" value="Melancholic">
+                <label for="melancholic" class="mood-label">Melancholic</label>
+
+                <input type="radio" id="indifferent" name="mood" class="mood-option" value="Indifferent">
+                <label for="indifferent" class="mood-label">Indifferent</label>
+
+                <input type="radio" id="grateful" name="mood" class="mood-option" value="Grateful">
+                <label for="grateful" class="mood-label">Grateful</label>
+
+                <input type="radio" id="ashamed" name="mood" class="mood-option" value="Ashamed">
+                <label for="ashamed" class="mood-label">Ashamed</label>
+
+                <input type="radio" id="conflicted" name="mood" class="mood-option" value="Conflicted">
+                <label for="conflicted" class="mood-label">Conflicted</label>
+
+                <input type="radio" id="elated" name="mood" class="mood-option" value="Elated">
+                <label for="elated" class="mood-label">Elated</label>
+            </div>
+            <div class="mood-column">
+                <input type="radio" id="resentful" name="mood" class="mood-option" value="Resentful">
+                <label for="resentful" class="mood-label">Resentful</label>
+
+                <input type="radio" id="hopeful" name="mood" class="mood-option" value="Hopeful">
+                <label for="hopeful" class="mood-label">Hopeful</label>
+
+                <input type="radio" id="nostalgic" name="mood" class="mood-option" value="Nostalgic">
+                <label for="nostalgic" class="mood-label">Nostalgic</label>
+
+                <input type="radio" id="apprehensive" name="mood" class="mood-option" value="Apprehensive">
+                <label for="apprehensive" class="mood-label">Apprehensive</label>
+
+                <input type="radio" id="envious" name="mood" class="mood-option" value="Envious">
+                <label for="envious" class="mood-label">Envious</label>
+
+                <input type="radio" id="embarrassed" name="mood" class="mood-option" value="Embarrassed">
+                <label for="embarrassed" class="mood-label">Embarrassed</label>
+            </div>
+        </div>
+        <button class="submit-btn" onclick="submitMood()">Submit</button>
+        <button onclick="logout()" class="logout-btn">Logout</button>
+    </div>
+
+    <script>
+        // Clear localStorage when the page loads
+        window.onload = function() {
+            localStorage.removeItem('currentMood');
+            displayMood();
+        };
+
+        function submitMood() {
+            const selectedMood = document.querySelector('input[name="mood"]:checked');
+            if (selectedMood) {
+                localStorage.setItem('currentMood', selectedMood.value);
+                window.location.href = 'p1.html';
+            } else {
+                alert('Please select a mood before submitting.');
+            }
+        }
+
+        function displayMood() {
+            const currentMood = localStorage.getItem('currentMood');
+            const moodDisplay = document.getElementById('mood-display');
+            if (currentMood) {
+                moodDisplay.textContent = `Today You're Feeling: ${currentMood}`;
+            } else {
+                moodDisplay.textContent = ''; // Clear the mood display if no mood is set
+            }
+        }
+
+        displayMood();
+
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            const users = JSON.parse(localStorage.getItem('users')) || {};
+
+            if (users[username] && users[username] === password) {
+                localStorage.setItem('currentUser', username);
+                document.getElementById('login-container').style.display = 'none';
+                document.getElementById('mood-container').style.display = 'block';
+            } else {
+                alert('Invalid credentials. Please try again.');
+            }
+        });
+
+        document.getElementById('show-register').addEventListener('click', function() {
+            document.getElementById('login-container').style.display = 'none';
+            document.getElementById('register-container').style.display = 'block';
+        });
+
+        document.getElementById('show-login').addEventListener('click', function() {
+            document.getElementById('register-container').style.display = 'none';
+            document.getElementById('login-container').style.display = 'block';
+        });
+
+        document.getElementById('register-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('reg-username').value;
+            const password = document.getElementById('reg-password').value;
+            const confirmPassword = document.getElementById('reg-confirm-password').value;
+
+            if (password !== confirmPassword) {
+                alert('Passwords do not match. Please try again.');
+                return;
+            }
+
+            const users = JSON.parse(localStorage.getItem('users')) || {};
+
+            if (users[username]) {
+                alert('Username already exists. Please choose a different one.');
+                return;
+            }
+
+            users[username] = password;
+            localStorage.setItem('users', JSON.stringify(users));
+
+            alert('Registration successful! You can now log in.');
+            document.getElementById('register-container').style.display = 'none';
+            document.getElementById('login-container').style.display = 'block';
+        });
+
+        // Check if user is already logged in
+        window.addEventListener('load', function() {
+            const currentUser = localStorage.getItem('currentUser');
+            if (currentUser) {
+                document.getElementById('login-container').style.display = 'none';
+                document.getElementById('mood-container').style.display = 'block';
+            }
+        });
+
+        // Add a logout function
+        function logout() {
+            localStorage.removeItem('currentUser');
+            document.getElementById('mood-container').style.display = 'none';
+            document.getElementById('login-container').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

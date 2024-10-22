@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mood Journal</title>
+    <link rel="stylesheet" href="Journal.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Mood Journal</h1>
+            <p class="date" id="current-date"></p>
+        </header>
+        <main>
+            <section class="mood-selector">
+                <h2>How are you feeling today?</h2>
+                <div class="mood-icons">
+                    <button class="mood-icon" data-mood="happy">😊</button>
+                    <button class="mood-icon" data-mood="sad">😢</button>
+                    <button class="mood-icon" data-mood="angry">😠</button>
+                    <button class="mood-icon" data-mood="anxious">😰</button>
+                    <button class="mood-icon" data-mood="neutral">😐</button>
+                </div>
+            </section>
+            <section class="journal-entry">
+                <textarea id="journal-text" placeholder="Write your thoughts here..."></textarea>
+                <button id="save-entry">Save Entry</button>
+            </section>
+        </main>
+        <section class="previous-entries">
+            <h2>Previous Entries</h2>
+            <ul id="entries-list"></ul>
+        </section>
+    </div>
+
+    <div id="mood-display" class="mood-display"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentDate = new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+            document.getElementById('current-date').textContent = currentDate;
+
+            let selectedMood = '';
+
+            function updateBackgroundColor(mood) {
+                document.body.className = mood ? `mood-${mood}` : '';
+            }
+
+            document.querySelectorAll('.mood-icon').forEach(button => {
+                button.addEventListener('click', function() {
+                    selectedMood = this.dataset.mood;
+                    document.querySelectorAll('.mood-icon').forEach(btn => btn.classList.remove('selected'));
+                    this.classList.add('selected');
+                    updateBackgroundColor(selectedMood);
+                });
+            });
+
+            document.getElementById('save-entry').addEventListener('click', function() {
+                const text = document.getElementById('journal-text').value;
+                if (text.trim() !== '' && selectedMood !== '') {
+                    const date = new Date().toLocaleString();
+                    const moodEmoji = getMoodEmoji(selectedMood);
+                    const entry = {
+                        mood: selectedMood,
+                        text: text,
+                        date: date
+                    };
+                    saveEntry(entry);
+                    addEntryToList(entry);
+                    document.getElementById('journal-text').value = '';
+                    selectedMood = '';
+                    document.querySelectorAll('.mood-icon').forEach(btn => btn.classList.remove('selected'));
+                    updateBackgroundColor(''); // Reset background color
+                } else {
+                    alert('Please select a mood and write an entry before saving.');
+                }
+            });
+
+            function getMoodEmoji(mood) {
+                const emojis = {
+                    happy: '😊',
+                    sad: '😢',
+                    angry: '😠',
+                    anxious: '😰',
+                    neutral: '😐'
+                };
+                return emojis[mood] || '😐';
+            }
+
+            function saveEntry(entry) {
+                let entries = JSON.parse(localStorage.getItem('journalEntries')) || [];
+                entries.unshift(entry); // Add new entry to the beginning of the array
+                localStorage.setItem('journalEntries', JSON.stringify(entries));
+            }
+
+            function addEntryToList(entry, index) {
+                const entryHtml = `
+                    <li data-index="${index}">
+                        <span class="mood-emoji">${getMoodEmoji(entry.mood)}</span>
+                        <div class="entry-content">
+                            <p>${entry.text}</p>
+                            <span class="entry-date">${entry.date}</span>
+                        </div>
+                        <button class="delete-entry">Delete</button>
+                    </li>
+                `;
+                document.getElementById('entries-list').innerHTML = entryHtml + document.getElementById('entries-list').innerHTML;
+            }
+
+            function loadEntries() {
+                const entries = JSON.parse(localStorage.getItem('journalEntries')) || [];
+                document.getElementById('entries-list').innerHTML = ''; // Clear existing entries
+                entries.forEach((entry, index) => addEntryToList(entry, index));
+            }
+
+            // Load existing entries when the page loads
+            loadEntries();
+
+            // Add event listener for delete buttons
+            document.getElementById('entries-list').addEventListener('click', function(e) {
+                if (e.target.classList.contains('delete-entry')) {
+                    const li = e.target.closest('li');
+                    const index = li.dataset.index;
+                    deleteEntry(index);
+                    li.remove();
+                }
+            });
+
+            function deleteEntry(index) {
+                let entries = JSON.parse(localStorage.getItem('journalEntries')) || [];
+                entries.splice(index, 1);
+                localStorage.setItem('journalEntries', JSON.stringify(entries));
+            }
+
+            function displayMood() {
+                const currentMood = localStorage.getItem('currentMood');
+                const moodDisplay = document.getElementById('mood-display');
+                if (currentMood) {
+                    moodDisplay.textContent = `Today You're Feeling: ${currentMood}`;
+                }
+            }
+
+            displayMood();
+        });
+    </script>
+</body>
+</html>

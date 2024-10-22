@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tracker</title>
+    <link rel="stylesheet" href="Tracker.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>Goals Tracker</h1>
+        <div class="goal-input">
+            <input type="text" id="goal-text" placeholder="Enter your goal">
+            <button id="add-goal">Add Goal</button>
+        </div>
+        <div class="progress-container">
+            <svg width="200" height="200" class="progress-ring">
+                <circle class="progress-ring__circle" stroke="#e74c3c" stroke-width="10" fill="transparent" r="90" cx="100" cy="100"/>
+                <text x="100" y="100" text-anchor="middle" dominant-baseline="central" class="progress-text">0%</text>
+            </svg>
+        </div>
+        <div class="goals-list">
+            <h2>Your Goals</h2>
+            <ul id="goals"></ul>
+        </div>
+    </div>
+
+    <div id="mood-display" class="mood-display"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const addGoalButton = document.getElementById('add-goal');
+            const goalInput = document.getElementById('goal-text');
+            const goalsList = document.getElementById('goals');
+            const progressRing = document.querySelector('.progress-ring__circle');
+            const progressText = document.querySelector('.progress-text');
+            let totalGoals = 0;
+            let completedGoals = 0;
+
+            const circumference = 2 * Math.PI * 90;
+            progressRing.style.strokeDasharray = `${circumference} ${circumference}`;
+            progressRing.style.strokeDashoffset = circumference;
+
+            function setProgress(percent) {
+                const offset = circumference - percent / 100 * circumference;
+                progressRing.style.strokeDashoffset = offset;
+                progressText.textContent = `${Math.round(percent)}%`;
+            }
+
+            addGoalButton.addEventListener('click', addGoal);
+            goalInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    addGoal();
+                }
+            });
+
+            function addGoal() {
+                const goalText = goalInput.value.trim();
+                if (goalText) {
+                    totalGoals++;
+                    const li = document.createElement('li');
+                    const goalId = `goal-${Date.now()}`;
+                    li.innerHTML = `
+                        <input type="checkbox" id="${goalId}">
+                        <label for="${goalId}">${goalText}</label>
+                    `;
+                    goalsList.appendChild(li);
+                    goalInput.value = '';
+
+                    // Add event listener for checkbox
+                    const checkbox = li.querySelector('input[type="checkbox"]');
+                    checkbox.addEventListener('change', function() {
+                        if (this.checked) {
+                            completedGoals++;
+                            celebrateAchievement(goalText);
+                        } else {
+                            completedGoals--;
+                        }
+                        updateProgress();
+                    });
+                    updateProgress();
+                }
+            }
+
+            function updateProgress() {
+                const progress = (completedGoals / totalGoals) * 100 || 0;
+                setProgress(progress);
+            }
+
+            function celebrateAchievement(goalText) {
+                const message = `You've achieved your goal: "${goalText}"`;
+                showCustomAlert('Congratulations!', message);
+            }
+
+            function showCustomAlert(title, message) {
+                const alertElement = document.createElement('div');
+                alertElement.className = 'custom-alert';
+                alertElement.innerHTML = `
+                    <button class="custom-alert-close">&times;</button>
+                    <div class="custom-alert-title">${title}</div>
+                    <div class="custom-alert-message">${message}</div>
+                `;
+                document.body.appendChild(alertElement);
+
+                // Trigger reflow to enable transition
+                alertElement.offsetWidth;
+
+                // Show the alert
+                setTimeout(() => {
+                    alertElement.classList.add('show');
+                }, 10);
+
+                // Remove the alert after 5 seconds
+                setTimeout(() => {
+                    alertElement.classList.remove('show');
+                    setTimeout(() => {
+                        document.body.removeChild(alertElement);
+                    }, 300);
+                }, 5000);
+
+                // Close button functionality
+                const closeButton = alertElement.querySelector('.custom-alert-close');
+                closeButton.addEventListener('click', () => {
+                    alertElement.classList.remove('show');
+                    setTimeout(() => {
+                        document.body.removeChild(alertElement);
+                    }, 300);
+                });
+            }
+        });
+
+        function displayMood() {
+            const currentMood = localStorage.getItem('currentMood');
+            const moodDisplay = document.getElementById('mood-display');
+            if (currentMood) {
+                moodDisplay.textContent = `Today You're Feeling: ${currentMood}`;
+            }
+        }
+
+        displayMood();
+    </script>
+</body>
+</html>

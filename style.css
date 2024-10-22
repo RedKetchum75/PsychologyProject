@@ -1,0 +1,277 @@
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #f0ebe5;
+    font-family: 'Georgia', serif;
+    position: relative;
+    overflow: hidden;
+    color: #5a4f4f;
+    padding-top: 20px; /* Add some top padding to the body */
+}
+
+.container {
+    text-align: center;
+    z-index: 1;
+}
+
+h1 {
+    font-size: 3rem;
+    margin-bottom: 40px;
+    font-weight: normal;
+    color: #7a6a6a;
+    text-align: center;
+}
+
+#timer {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: #5a4f4f;
+}
+
+button {
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    margin: 0 10px;
+    background-color: #d7ccc8;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    color: #5a4f4f;
+    font-family: 'Georgia', serif;
+}
+
+button:hover {
+    background-color: #bcaaa4;
+}
+
+#mood-slider {
+    width: 300px;
+    margin: 20px 0;
+}
+
+.background-image {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://www.quicksprout.com/wp-content/uploads/2023/08/wells.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.2;
+    z-index: -1;
+}
+
+.mood-options {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    margin-bottom: 40px;
+    padding: 0 20px; /* Add horizontal padding */
+}
+
+.mood-column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex: 1; /* Make columns flexible */
+    margin: 0 10px; /* Add horizontal margin between columns */
+}
+
+/* Adjust the first and last columns to align with the edges */
+.mood-column:first-child {
+    margin-left: 0;
+}
+
+.mood-column:last-child {
+    margin-right: 0;
+}
+
+.mood-label {
+    font-size: 1.2rem;
+    color: #5a4f4f;
+    cursor: pointer;
+    transition: color 0.3s;
+    display: flex;
+    align-items: center;
+    padding: 5px 0;
+}
+
+.mood-label:hover {
+    color: #bcaaa4;
+}
+
+.submit-btn {
+    font-size: 1.2rem;
+    padding: 10px 30px;
+    background-color: #d7ccc8;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    color: #5a4f4f;
+    font-family: 'Georgia', serif;
+}
+
+.submit-btn:hover {
+    background-color: #bcaaa4;
+}
+
+.mood-display {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: rgba(215, 204, 200, 0.8);
+    padding: 10px 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    font-weight: bold;
+    z-index: 1000;
+    color: #5a4f4f;
+}
+
+.mood-option {
+    display: none;
+}
+
+.mood-label::before {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    border: 2px solid #5a4f4f;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+.mood-option:checked + .mood-label::before {
+    background-color: #5a4f4f;
+    box-shadow: inset 0 0 0 4px #f0ebe5;
+}
+
+/* Add this new style for the quote */
+#quote {
+    font-style: italic;
+    max-width: 600px;
+    margin: 20px auto;
+    line-height: 1.6;
+    color: #7a6a6a;
+}
+
+/* Add this new style for the message */
+.message {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #7a6a6a;
+    text-align: center;
+    margin-bottom: 30px;
+    font-style: italic;
+}
+
+.logo-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto 20px;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.logo {
+    width: 100%;
+    height: auto;
+    max-height: 150px;
+    object-fit: contain;
+}
+
+.login-container {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    margin-top: 20px; /* Add some space between the logo and the login container */
+}
+
+.login-container h2 {
+    margin-bottom: 20px;
+    color: #5a4f4f;
+}
+
+.login-container input {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #d7ccc8;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.login-container button {
+    width: 100%;
+    padding: 10px;
+    background-color: #d7ccc8;
+    color: #5a4f4f;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.login-container button:hover {
+    background-color: #bcaaa4;
+}
+
+.login-container p {
+    margin-top: 20px;
+}
+
+.login-container button#show-register,
+.login-container button#show-login {
+    background: none;
+    border: none;
+    color: #5a4f4f;
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 0;
+    font: inherit;
+}
+
+.login-container button#show-register:hover,
+.login-container button#show-login:hover {
+    color: #bcaaa4;
+}
+
+.mood-container {
+    text-align: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logout-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 5px 10px;
+    background-color: #d7ccc8;
+    color: #5a4f4f;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.logout-btn:hover {
+    background-color: #bcaaa4;
+}

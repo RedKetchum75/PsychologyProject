@@ -1,0 +1,147 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #bbd5f0;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s ease;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: #4a4a4a;
+}
+
+.date {
+    font-size: 1.2rem;
+    color: #888;
+}
+
+.mood-selector {
+    background-color: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.mood-icons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 15px;
+}
+
+.mood-icon {
+    font-size: 2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.mood-icon:hover, .mood-icon.selected {
+    transform: scale(1.2);
+}
+
+.journal-entry {
+    background-color: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+textarea {
+    width: 100%;
+    height: 150px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 1rem;
+    resize: vertical;
+}
+
+button {
+    background-color: #4CAF50;
+    color: rgb(107, 58, 29);
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #62d5bc;
+}
+
+.previous-entries {
+    background-color: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    background-color: #f9f9f9;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+li .mood-emoji {
+    font-size: 1.5rem;
+    margin-right: 10px;
+}
+
+li .entry-content {
+    flex-grow: 1;
+    margin-right: 10px;
+}
+
+li .entry-date {
+    font-size: 0.8rem;
+    color: #888;
+}
+
+/* Add these new styles for mood backgrounds */
+body.mood-happy { background-color: #ffcd45; }
+body.mood-sad { background-color: #e0b0ff; }
+body.mood-angry { background-color: #ff0400a5; }
+body.mood-anxious { background-color: #90ee90; }
+body.mood-neutral { background-color: #9b9b9b; }
+
+.delete-entry {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    border-radius: 3px;
+    margin-left: 10px;
+}
+
+.delete-entry:hover {
+    background-color: #ff1a1a;
+}

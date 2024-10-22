@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mental Health Tools</title>
+    <link rel="stylesheet" href="p1.css">
+</head>
+<body>
+    <div class="tree"></div>
+    <div class="tree"></div>
+    <div class="tree"></div>
+    <div class="tree"></div>
+    <div class="tree"></div>
+    <div class="tree"></div>
+    <div class="tree"></div>
+    <div class="tree"></div>
+    <div class="tree"></div>
+    <div class="tree"></div>
+
+    <h1>Mental Health Tools</h1>
+    <div class="mood-options">
+        <div class="column">
+            <input type="radio" id="emotional-wheel" name="tool" class="mood-option">
+            <label for="emotional-wheel" class="mood-label">Emotional Wheel</label>
+
+            <input type="radio" id="tracker" name="tool" class="mood-option">
+            <label for="tracker" class="mood-label">Tracker</label>
+        </div>
+        <div class="column center">
+            <input type="radio" id="meditation" name="tool" class="mood-option">
+            <label for="meditation" class="mood-label">Meditation</label>
+        </div>
+        <div class="column">
+            <input type="radio" id="calming-playlist" name="tool" class="mood-option">
+            <label for="calming-playlist" class="mood-label">Calming Playlist</label>
+
+            <input type="radio" id="journal" name="tool" class="mood-option">
+            <label for="journal" class="mood-label">Journal</label>
+        </div>
+    </div>
+    <button class="submit-btn" onclick="submitTool()">Submit</button>
+
+    <div id="mood-display" class="mood-display"></div>
+
+    <script>
+        function submitTool() {
+            const selectedTool = document.querySelector('input[name="tool"]:checked');
+            if (selectedTool) {
+                switch (selectedTool.id) {
+                    case 'calming-playlist':
+                        window.location.href = 'CalmingPlaylist.html';
+                        break;
+                    case 'meditation':
+                        window.location.href = 'Meditation.html';
+                        break;
+                    case 'journal':
+                        window.location.href = 'Journal.html';
+                        break;
+                    case 'tracker':
+                        window.location.href = 'Tracker.html';
+                        break;
+                    case 'emotional-wheel':
+                        window.location.href = 'EmotionalWheel.html';
+                        break;
+                    // Add more cases for other tools when you implement them
+                }
+            }
+        }
+
+        function displayMood() {
+            const currentMood = localStorage.getItem('currentMood');
+            const moodDisplay = document.getElementById('mood-display');
+            if (currentMood) {
+                moodDisplay.textContent = `Today You're Feeling: ${currentMood}`;
+            }
+        }
+
+        displayMood();
+    </script>
+</body>
+</html>
